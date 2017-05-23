@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "strings.h"
+#include <string.h>
 
 void input(char *paths, char *delim, char *dir)
 {
@@ -7,34 +8,39 @@ void input(char *paths, char *delim, char *dir)
     //scanf("%s", delim);
     //printf("user name: ");
     //scanf("%s", name);
-    //printf("path: ");
-    //scanf("%s", paths);
+    printf("path: ");
+    scanf("%s", paths);
     printf("dir: ");
     scanf("%s", dir);
 }
 
 int check_dir(char *dir) 
 {
-    //char *home = "/home/";
-    //    if(sstr(dir, home) == 0) 
-	//	    return -1;
-
-    char *symb = "!@#?.,^$&~%%*()[]{}\"\'\\:;><` \0";
-    char *path = stok(dir, "/");
-    while(path) {
-        if(!(sspn(path, symb) == slen(path)))
-            return 0;
-        path = stok(NULL, "/");
+    char *home = "/home/";
+    if(strstr(dir, home) == 0) 
+		return -1;
+     else {
+        char *symb = "!@#?.,^$&~%%*()[]{}\"\'\\:;><` \0";
+        while(dir) {
+            if(sspn(dir, symb) == 0)
+                return 0;
+            else
+                return -1;
+        }
     }
-    return -1;
 }
 
-//int check_paths(char *paths) 
-//{
+int check_paths(char *paths) 
+{
+    char *symb = "!@#?.,^$&~%%*()[]{}\"\'\\:;><` \0";
+        while(dir) {
+            if(sspn(dir, symb) == 0)
+                return 0;
+            else
+                return -1;
+}
 
-//}
-
-void process(char *paths, char *delim, char *dir)
+/*void process(char *paths, char *delim, char *dir)
 {
     char *path = stok(paths, delim);
     int i = 0;
@@ -42,7 +48,7 @@ void process(char *paths, char *delim, char *dir)
         if(path[i] == '~' && path[i+1] == '/')
            
         path = stok(NULL, delim);
-}
+}*/
 
 int main()
 {    
@@ -55,9 +61,11 @@ int main()
     if(check_dir(dir) == -1)
         printf("Incorrect dir\n");
     if(check_dir(dir) == 0)
-        printf("EEEEE\n");
- //   if(check_paths(paths) == -1)
- //       printf("Incorrect paths\n");
+        printf("Right\n");
+    if(check_paths(paths) == -1)
+        printf("Incorrect paths\n");
+    if(check_paths(paths) == 0)
+        printf("Right\n");
 
     return 0;
 }
